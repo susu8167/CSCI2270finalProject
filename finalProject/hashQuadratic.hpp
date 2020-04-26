@@ -1,23 +1,15 @@
-#ifndef HASHCHAINING_HPP
-#define HASHCHAINING_HPP
+#ifndef HASHQUADRATIC_HPP
+#define HASHQUADRATIC_HPP
 #pragma once
 
 using namespace std;
 
-struct Node
-{
-    int key;
-    struct Node* next;
-};  
-
 class HashTable
 {
-    int tableSize;  // No. of buckets (linked lists)
+    int tableSize;
     int currentSize;
-    // Pointer to an array containing buckets
-    Node* *table;
-    int numOfcollision =0;
-    Node* createNode(int key, Node* next);
+    int* table;
+    int numOfcollision = 0;
 public:
     HashTable(int bsize);  // Constructor
 
@@ -30,7 +22,7 @@ public:
     void printTable();
     int getNumOfCollision();
     int getSizeOfTable(); // getter function
-    Node* searchItem(int key);
+    int searchItem(int key); //return index
     ~HashTable(); // Destructor
 };
 
