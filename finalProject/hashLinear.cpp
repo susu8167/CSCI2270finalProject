@@ -56,7 +56,7 @@ int HashTable::searchItem(int key){ // return index
     int index = hashFunction(key);
     int i = 1;
     while(table[index] && table[index] != key){
-        index += i*i;
+        index += i;
         i++;
     }
 
