@@ -4,14 +4,15 @@
 
 using namespace std;
 
-class HashTable
+class HashLinear
 {
     int tableSize;
     int currentSize;
     int* table;
-    int numOfcollision = 0;
+    int numOfCollision =0;  // num of collisions while inserting
+    int numOfSearchCollision=0; // num of collisions while searching
 public:
-    HashTable(int bsize);  // Constructor
+    HashLinear(int bsize);  // Constructor
 
     // inserts a key into hash table
     bool insertItem(int key);
@@ -20,10 +21,14 @@ public:
     unsigned int hashFunction(int key);
 
     void printTable();
+    //functions to get and reset collision count
+    void resetNumCollision();
     int getNumOfCollision();
+    void resetNumSearchCollision();
+    int getNumOfSearchCollision();
     int getSizeOfTable(); // getter function
     int searchItem(int key); //return index
-    ~HashTable(); // Destructor
+    ~HashLinear(); // Destructor
 };
 
 #endif

@@ -10,7 +10,7 @@ linkedList::linkedList(){
 //alternate insert function (using tail)
 
 void LinkedList::insertNode(int data){
-    Node* newNode = new Node;
+    LLNode* newNode = new LLNode;
     newNode->data=data;
     if(!head){
         head = tail = newNode;
@@ -24,8 +24,8 @@ void LinkedList::insertNode(int data){
 }
 
 */
-Node* getInsertPoint(Node* head){ //helper function for insertNode function to find end of list
-    Node* crawler = head;
+LLNode* getInsertPoint(LLNode* head){ //helper function for insertNode function to find end of list
+    LLNode* crawler = head;
     while(crawler->next != nullptr){
         crawler=crawler->next;
     }
@@ -33,14 +33,14 @@ Node* getInsertPoint(Node* head){ //helper function for insertNode function to f
 }
 
 void linkedList::insertNode(int data){// un-ordered insert at end of list, O(n) time
-    Node* newNode = new Node;
+    LLNode* newNode = new LLNode;
     newNode->data=data;
     newNode->next=nullptr;
     if(!head){
         head=newNode;
     }
     else{
-        Node* insertPoint = getInsertPoint(head);
+        LLNode* insertPoint = getInsertPoint(head);
         insertPoint->next = newNode;
     }
 } 
@@ -55,7 +55,7 @@ while (ptr->next != NULL)
 */
 
 void linkedList::printList(){
-    Node* crawler = head;
+    LLNode* crawler = head;
     while(crawler){
         std::cout<<crawler->data<<" -> ";
         crawler = crawler->next;
@@ -63,8 +63,8 @@ void linkedList::printList(){
     std::cout<<"NULL";
 }
 
-Node* linkedList::search(int data){
-    Node* crawler = head;
+LLNode* linkedList::search(int data){
+    LLNode* crawler = head;
     while(crawler && crawler->data != data){
         crawler = crawler->next;
     }
@@ -72,7 +72,7 @@ Node* linkedList::search(int data){
 } //return nullptr if data isn't found
 
 linkedList::~linkedList(){
-    Node* temp;
+    LLNode* temp;
     while(head){
         temp = head;
         head = head->next;

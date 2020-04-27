@@ -1,13 +1,13 @@
 #ifndef BST_H
 #define BST_H
-
+#include <iostream>
 #pragma once
 
-struct Node{
+struct BSTNode{
     int data;
-    Node* left;
-    Node* right;
-    Node(){
+    BSTNode* left;
+    BSTNode* right;
+    BSTNode(){
         left = nullptr;
         right = nullptr;
         data=NULL;
@@ -18,11 +18,11 @@ class BST{
     public:
         BST();// constructor
         void insert(int data);
-        Node* search(int data);
+        BSTNode* search(int data);
         void printTree(); // using preorder traversal to print the order data is inserted in
         ~BST();
     private:
-        Node* root;
+        BSTNode* root;
 };
 
 #endif

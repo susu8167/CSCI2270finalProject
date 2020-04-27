@@ -1,46 +1,44 @@
-#include "hashQuadratic.hpp"
+#include "hashLinear.hpp"
 #include <iostream>
 
 //HASHTABLE WITH QUADRATIC
-HashTable::HashTable(int bsize){
+HashLinear::HashLinear(int bsize){
     tableSize = bsize;
     currentSize = 0;
     table = new int[bsize];
     for(int i=0; i<bsize; i++){
         table[i] = NULL;
     }
+    this->numOfCollision =0; 
+    this->numOfSearchCollision=0;
 } // Constructor                        
 
-int HashTable::getSizeOfTable(){
+int HashLinear::getSizeOfTable(){
     return this->currentSize;
 }
 
     // inserts a key into hash table
-bool HashTable::insertItem(int key){
-    if(currentSize != tableSize){
-        int index = hashFunction(key);
-
-        int i = 1;
-        while(table[index]){ //quadratic probing
-            index += i*i;
-            i++;
-            numOfcollision++;
-        }
-        table[index] = key;
-        currentSize++;
-        return true;
-    }
-    else{
-        return false;
-    }
+bool HashLinear::insertItem(int key){
+       int index = hashFunction(key);
+       while(table[index] && table[index]!=key && table[index]!=-1){
+           index++;
+           index%=tableSize;
+           this->numOfCollision++;
+       }
+       if(!table[index]){
+           currentSize++;
+           table[index]=key;
+           return true;
+       }
+       return false;
 }
 
     // hash function to map values to key
-unsigned int HashTable::hashFunction(int key){
+unsigned int HashLinear::hashFunction(int key){
     return key%tableSize;
 }
 
-void HashTable::printTable(){
+void HashLinear::printTable(){
     for(int i=0; i<tableSize; i++){ //traverse each node in the table
         if(table[i]){
             std::cout<<table[i]<<" ";
@@ -48,16 +46,24 @@ void HashTable::printTable(){
     }
 }
 
-int HashTable::getNumOfCollision(){
-    return this->numOfcollision;
+int HashLinear::getNumOfCollision(){
+    return this->numOfCollision;
 }
-
-int HashTable::searchItem(int key){ // return index
+void HashLinear::resetNumCollision(){
+    this->numOfCollision=0;
+}
+void HashLinear::resetNumSearchCollision(){
+    this->numOfSearchCollision=0;
+}
+int HashLinear::getNumOfSearchCollision(){
+    return this->numOfSearchCollision;
+}
+int HashLinear::searchItem(int key){ // return index
     int index = hashFunction(key);
-    int i = 1;
     while(table[index] && table[index] != key){
-        index += i;
-        i++;
+        index++;
+        index %= tableSize;
+        this->numOfSearchCollision++;
     }
 
     if(table[index] == NULL){
@@ -68,6 +74,6 @@ int HashTable::searchItem(int key){ // return index
     }
 }
 
-HashTable::~HashTable(){
+HashLinear::~HashLinear(){
     delete[] table;
 };

@@ -5,13 +5,13 @@ BST::BST(){
     root = nullptr;
 }
 
-Node* newNode(int data){
-    Node* newNode = new Node;
+BSTNode* newNode(int data){
+    BSTNode* newNode = new BSTNode;
     newNode->data = data;
     newNode->left = newNode->right = nullptr;
     return newNode;
 }
-Node* insertHelper(Node* current, int data){
+BSTNode* insertHelper(BSTNode* current, int data){
     if(!current){
         return newNode(data);
     }
@@ -28,8 +28,8 @@ void BST::insert(int data){
     root = insertHelper(root,data);
 }
 
-Node* BST::search(int data){
-    Node* current = root;
+BSTNode* BST::search(int data){
+    BSTNode* current = root;
     while(current && current->data != data){
         if(current->data < data){ //go left
             current = current->left;
@@ -42,7 +42,7 @@ Node* BST::search(int data){
     return current;
 } //if data isn't in BST, return nullptr
 
-void printTreeHelper(Node* current){
+void printTreeHelper(BSTNode* current){
     // can achieve different traversal methods depending on order of function calls below
     if(current){
         printTreeHelper(current->left);
@@ -57,7 +57,7 @@ void BST::printTree(){
     printTreeHelper(root);
 } // using inorder traversal to print the data in descending order
 
-void deleteHelper(Node* current){
+void deleteHelper(BSTNode* current){
     if(current){
         deleteHelper(current->left);
         deleteHelper(current->right);

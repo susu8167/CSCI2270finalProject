@@ -5,10 +5,10 @@
 #include <iostream>
 
 
-struct Node{
+struct LLNode{
     int data;
-    Node* next;
-    Node(){
+    LLNode* next;
+    LLNode(){
         data=NULL;
         next = nullptr;
     }
@@ -19,11 +19,11 @@ class linkedList{
         linkedList();
         void insertNode(int data); // ordered insert, 3 cases
         void printList(); 
-        Node* search(int data);
+        LLNode* search(int data);
         ~linkedList();
     private:
-        Node* head = nullptr;
-        //Node* tail;
+        LLNode* head = nullptr;
+        //LLNode* tail;
 };
 
 #endif

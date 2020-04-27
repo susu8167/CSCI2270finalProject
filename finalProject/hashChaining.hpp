@@ -4,10 +4,10 @@
 
 using namespace std;
 
-struct Node
+struct HashNode
 {
     int key;
-    struct Node* next;
+    struct HashNode* next;
 };  
 
 class HashTable
@@ -15,9 +15,10 @@ class HashTable
     int tableSize;  // No. of buckets (linked lists)
     int currentSize;
     // Pointer to an array containing buckets
-    Node* *table;
-    int numOfcollision =0;
-    Node* createNode(int key, Node* next);
+    HashNode* *table;
+    int numOfCollision =0;  // num of collisions while inserting
+    int numOfSearchCollision=0; // num of collisions while searching
+    HashNode* createNode(int key, HashNode* next);
 public:
     HashTable(int bsize);  // Constructor
 
@@ -28,9 +29,15 @@ public:
     unsigned int hashFunction(int key);
 
     void printTable();
+
+    //functions to get and reset collision count
     int getNumOfCollision();
+    void resetNumCollision();
+    void resetNumSearchCollision();
+    int getNumOfSearchCollision();
+
     int getSizeOfTable(); // getter function
-    Node* searchItem(int key);
+    HashNode* searchItem(int key);
     ~HashTable(); // Destructor
 };
 
